@@ -61,15 +61,32 @@ exports.delete=(req,res)=>{
         }
     })
     .catch(err=>{
-        res.status(500).send({message:'Error occurder while deleing user'})
+        res.status(500).send({message:'Error occurder while deleting user'})
     })
 }
 exports.find=(req,res)=>{
-    Userdb.find()
-        .then(user=>{
-            res.send(user)
-        })
-        .catch(err=>{
-            res.status(500).send({message:err||'Some error has occured while retrieving user info'})
-        })
+    if(req.query.id){
+        const id = req.query.id;
+        Userdb.findById(id)
+            .then(data=>{
+                if(!data){
+                    res.status(400).send({message:'No such user'})
+                }
+                else{
+                    res.send(data)
+                }       
+            })
+            .catch(err=>{
+                res.status(500).send({message:'Error occured obtaining user data'})
+            })
+    }
+    else{
+        Userdb.find()
+            .then(user=>{
+                res.send(user)
+            })
+            .catch(err=>{
+                res.status(500).send({message:err||'Some error has occured while retrieving user info'})
+            })
+    }
 }
