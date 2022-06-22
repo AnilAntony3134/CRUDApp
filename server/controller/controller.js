@@ -16,7 +16,7 @@ exports.create=(req,res)=>{
     user
        .save(user)
        .then(data=>{
-            res.send(data)
+            res.redirect('/adduser')
        })
        .catch(err=>{
             res.status(500).send({
@@ -40,7 +40,9 @@ exports.update=(req,res)=>{
                 res.status(400).send({message:'Invalid user, NO such user available'})
             }
             else{
-                res.send({message:`User ${id} deleted succesfully`})
+                // res.send({message:`User ${id} updated succesfully`})
+                res.redirect('/updateuser')
+
             }
         })
         .catch(err=>{
