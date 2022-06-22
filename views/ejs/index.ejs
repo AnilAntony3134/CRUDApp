@@ -2,6 +2,32 @@
     <%-include('include/header')%>
 <!-- include header -->
 
+         <!-- form handling -->
+         <div id="site-main">
+            <div class="container">
+                 <div class='box-nav d-flex-justify-between'>
+                    <a href="/adduser" class="border-shadow">
+                        <span class="text-gradient">New User <i class='fas fa-user'></i></span>
+                    </a>
+                 </div>
+                 <form action="/" method="post">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                       <%-include('include/show')%>
+                    </table>
+                 </form>
+            </div>
+        </div>
+    
 <!-- include footer -->
     <%-include('include/footer')%>
 <!-- include footer -->
