@@ -28,11 +28,41 @@ exports.create=(req,res)=>{
 
 
 exports.update=(req,res)=>{
-    let id = req.params.id;
+    if(!req.body){
+        return res
+            .status(400)
+            .send('message:Data to update cannot be empty')
+    }
+    const id = req.params.id;
+    Userdb.findByIdAndUpdate(id,req.body,{useFindAndModify:false})
+        .then(data=>{
+            if(!data){
+                res.status(400).send({message:'Invalid user, NO such user available'})
+            }
+            else{
+                res.send({message:`User ${id} deleted succesfully`})
+            }
+        })
+        .catch(err=>{
+            res.status(500).send({message:'Error occured while updating user data'})
+        })
+
     
 }
 exports.delete=(req,res)=>{
-    
+    const id = req.params.id;
+    Userdb.findByIdAndDelete(id)
+    .then(data=>{
+        if(!data){
+            res.status(400).send({message:'No such user'})
+        }
+        else{
+            res.send(data)
+        }
+    })
+    .catch(err=>{
+        res.status(500).send({message:'Error occurder while deleing user'})
+    })
 }
 exports.find=(req,res)=>{
     Userdb.find()
@@ -40,6 +70,6 @@ exports.find=(req,res)=>{
             res.send(user)
         })
         .catch(err=>{
-            res.status(500).send({message:error||'Some error has occured while retrieving user info'})
+            res.status(500).send({message:err||'Some error has occured while retrieving user info'})
         })
 }
