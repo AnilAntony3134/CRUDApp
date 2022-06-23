@@ -1,0 +1,62 @@
+<form id="update_user" method="post">
+   <div class="new_user">
+        <div class="form-group">
+            <label for="name" class="text_light">Name</label>
+            <input type="hidden" name="id" value="<%=user._id%>">
+            <input type="text" name="name" value="<%=user.name %>" placeholder="Enter your Name">
+        </div>
+        <div class="form-group">
+            <label for="Email" class="text-light">Email</label>
+            <input type="text" name="email" value="<%=user.email %>" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="gender" class="text-light">Gender</label>
+            <div class="radio inline">
+                <input type="radio" id="radio2" name="gender" value="Male" <%=user.gender == 'Male'?'checked':''%>>
+                <label for="radio2" class="radio-label">Male</label>
+             </div>
+             <div class="radio inline">
+                <input type="radio" id="radio3" name="gender" value="Female" <%=user.gender == 'Female'?'checked':''%>>
+                <label for="radio3" class="radio-label">Female</label>
+             </div>
+       </div>
+       <div class="form-group">
+        <label for="status" class="text-light">Status</label>
+        <div class="radio inline">
+            <input type="radio" id="radio4" name="status" value="active" <%=user.status == 'active'?'checked':''%>>
+            <label for="radio4" class="radio-label">Active</label>
+         </div>
+         <div class="radio inline">
+            <input type="radio" id="radio5" name="status" value="inactive" <%=user.status != 'active'?'checked':''%>>
+            <label for="radio5" class="radio-label">Inactive</label>
+         </div>
+         <div class="form-group">
+            <button type="submit" class="btn text-dark up">Save</button>
+         </div>
+   </div>
+</form>
+<!-- <script>   
+       console.log('ail antony');
+   $("#update_user").submit(function(event){
+      console.log('Geting called')
+       event.preventDefault();
+       var unindexed_array = $(this).serializeArray();
+       var data={}
+       console.log(unindexed_array);
+
+
+       $.map(unindexed_array,function(n,i){
+           data[n['name']]=n['value']
+       })
+       console.log(data);
+       var request = {
+           'url':`http://localhost:3000/api/users/${user._id}`,
+           'method': 'put',
+           'data': data
+       }
+       $.ajax(request).done(function(response){
+           alert('Data updated Successfully')
+       })
+   }) 
+</script>
+-->
